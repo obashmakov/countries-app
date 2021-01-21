@@ -1,14 +1,18 @@
+/* eslint-disable max-len */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import './index.css';
-import { HashRouter as Router } from 'react-router-dom';
 import { App } from './App';
 
+const client = new ApolloClient({
+  uri: 'https://countries.trevorblades.com',
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
   document.getElementById('root'),
 );
